@@ -1,8 +1,6 @@
 import pandas as pd
 import os
-
-console_data = {}
-names_list = []
+dataframes = []
 directory = 'CSV Files'
 for filename in os.listdir(directory):
     print(filename)
@@ -11,10 +9,7 @@ for filename in os.listdir(directory):
     df = pd.read_csv(f)
     df = df.drop_duplicates(keep=False, subset = ['Game'])
     df = df.fillna('N/A')
-    modified_name = filename.replace('List of best-selling ', '')
-    console_name = modified_name.replace(' video games.csv', '')
-    console_data[console_name] = df.to_dict('records')
-    names_list = names_list + df['Game'].tolist()
+    dataframes.append(df)
 
 
 
