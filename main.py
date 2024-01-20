@@ -28,12 +28,12 @@ for filename in dataframes:
     df =dataframes[filename]
     for index, game in df.iterrows():
         for site in sites:
-            if console in site.consoles:
-                price = crawler.search(game['Game'], site)
-                if price is not None: 
-                    prices.append(price)
-                    print(price)
-                else: prices.append(game['Price'])
+            # if console in site.consoles:
+            price = crawler.search(game['Game'], site)
+            if price is not None: 
+                prices.append(price)
+                print(price)
+            else: prices.append(game['Price'])
     df['Price'] = prices
     df.to_csv(filename, index=False)
     
