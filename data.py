@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-dataframes = []
+dataframes = {}
 directory = 'CSV Files'
 for filename in os.listdir(directory):
     print(filename)
@@ -9,7 +9,7 @@ for filename in os.listdir(directory):
     df = pd.read_csv(f)
     df = df.drop_duplicates(keep=False, subset = ['Game'])
     df = df.fillna('N/A')
-    dataframes.append(df)
+    dataframes[filename] = df
 
 
 
