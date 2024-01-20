@@ -23,8 +23,9 @@ sites = []
 for row in siteData:
     sites.append(Website(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
 
-for df in dataframes:
+for filename in dataframes:
     prices = []
+    df =dataframes[filename]
     for index, game in df.itterows():
         for site in sites:
             if console in site.consoles:
@@ -34,7 +35,7 @@ for df in dataframes:
                     print(price)
                 else: prices.append(game['Price'])
     df['Price'] = prices
-    df.to_csv(
+    df.to_csv(filename, index=False)
     
 
 # for site in sites:
