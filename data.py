@@ -3,7 +3,7 @@ import os
 
 console_data = {}
 names_list = []
-directory = 'App/Recent_CSVFiles'
+directory = 'CSV Files'
 for filename in os.listdir(directory):
     # if 'PC' in filename:
     f = os.path.join(directory,filename)
