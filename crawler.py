@@ -41,7 +41,7 @@ class Crawler:
         modified_game_name = re.sub('[-()!.:,\']', '', game_name)
         game_name_words = modified_game_name.split(' ')
         game_name_words = list(map(lambda word: word.strip().lower(), game_name_words))
-        modified_product_name = re.sub('[-()!.:,\’']', '', product_name)
+        modified_product_name = re.sub('[-()!.:,\']', '', product_name)
         product_name_words = modified_product_name.split(' ')
         product_name_words = list(map(lambda word: word.strip().lower(), product_name_words))
         print(game_name_words)
