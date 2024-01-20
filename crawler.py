@@ -8,7 +8,7 @@ import re
 class Crawler:
     
     def __init__(self):
-        self.__headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+        # self.__headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
         # self.__driver = webdriver.Chrome()
 
 
@@ -19,7 +19,7 @@ class Crawler:
         #     html = self.__driver.page_source
         # else:
         try:
-            req = requests.get(url, headers=self.__headers)
+            req = requests.get(url)
             if req.status_code != 200:
                 print(req)
                 return None
