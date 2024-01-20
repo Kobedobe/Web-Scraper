@@ -5,6 +5,7 @@ console_data = {}
 names_list = []
 directory = 'CSV Files'
 for filename in os.listdir(directory):
+    print(filename)
     # if 'PC' in filename:
     f = os.path.join(directory,filename)
     df = pd.read_csv(f)
