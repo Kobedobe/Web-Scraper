@@ -26,6 +26,7 @@ class Crawler:
             else:
                 html = req.text
         except requests.exceptions.RequestException:
+            print('damn')
             return None
         print(req)
         return BeautifulSoup(html, 'html.parser')
