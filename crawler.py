@@ -26,7 +26,7 @@ class Crawler:
                 html = req.text
         except requests.exceptions.RequestException:
             return None
-    return BeautifulSoup(html, 'html.parser')
+        return BeautifulSoup(html, 'html.parser')
 
     def __safe_get(self, page_obj, selector):
         child_obj = page_obj.select(selector)
