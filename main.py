@@ -3,15 +3,14 @@ from crawler import Crawler
 from data import *
 
 crawler = Crawler()
-siteData = [['Amazon', 'https://www.amazon.co.uk/', 'https://www.amazon.co.uk/s?k=', 'span[data-component-type="s-search-results"] div[data-component-type="s-search-result"]', 
-             'div[data-cy="title-recipe"]>h2 span', 'div[data-cy="title-recipe"] div.a-row span.a-size-base', lambda tag: True if tag and 'PEGI Rating:' in tag.text else False,
-             'div[data-cy="price-recipe"] span.a-price span.a-offscreen', False, ['Nintendo Switch', 'PC', 'PlayStation 5']],
-            ['Argos', 'https://www.argos.co.uk/', 'https://www.argos.co.uk/search/', 'div[data-test="product-list"] div[data-test="component-product-card"]',
-             'div[data-test="component-product-card-title"]', 'div[data-test="component-product-card-title"]', lambda tag: True if tag and 'Game' in tag.text else False,
-             'div[data-test="component-product-card-price"] strong', False, ['Nintendo Switch', 'PC', 'PlayStation 5']],
-              ['STEAM', 'https://store.steampowered.com/', 'https://store.steampowered.com/search/?term=', '#search_resultsRows>a', '.title', '', 
+siteData = [['STEAM', 'https://store.steampowered.com/', 'https://store.steampowered.com/search/?term=', '#search_resultsRows>a', '.title', '', 
                 None, 'div.discount_final_price', False, ['PC', 'PlayStation 5']]]
-
+# ['Amazon', 'https://www.amazon.co.uk/', 'https://www.amazon.co.uk/s?k=', 'span[data-component-type="s-search-results"] div[data-component-type="s-search-result"]', 
+#              'div[data-cy="title-recipe"]>h2 span', 'div[data-cy="title-recipe"] div.a-row span.a-size-base', lambda tag: True if tag and 'PEGI Rating:' in tag.text else False,
+#              'div[data-cy="price-recipe"] span.a-price span.a-offscreen', False, ['Nintendo Switch', 'PC', 'PlayStation 5']],
+#             ['Argos', 'https://www.argos.co.uk/', 'https://www.argos.co.uk/search/', 'div[data-test="product-list"] div[data-test="component-product-card"]',
+#              'div[data-test="component-product-card-title"]', 'div[data-test="component-product-card-title"]', lambda tag: True if tag and 'Game' in tag.text else False,
+#              'div[data-test="component-product-card-price"] strong', False, ['Nintendo Switch', 'PC', 'PlayStation 5']],
 # ['CEX', 'https://uk.webuy.com/', 'https://uk.webuy.com/search?stext=', 'div.search-result-grid>div', 'div.card-title>a', 'div.card-subtitle', 
 # lambda tag: True if tag and 'Games' in tag.text else False, 'p.product-main-price',True, ['Nintendo Switch', 'PC', 'PlayStation 5']],
 # ['Currys', 'https://www.currys.co.uk/', 'https://www.currys.co.uk/search?q=', 'div.product-item-element', 'h2.pdp-grid-product-name', 'div.ratings', 
