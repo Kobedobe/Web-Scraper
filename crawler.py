@@ -2,31 +2,31 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import random
-from selenium import webdriver
+# from selenium import webdriver
 import re
 
 class Crawler:
     
     def __init__(self):
         self.__headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
-        self.__driver = webdriver.Chrome()
+        # self.__driver = webdriver.Chrome()
 
 
     def __get_page(self, url, dynamically_generated):
-        if dynamically_generated:
-            self.__driver.get(url)
-            time.sleep(10)
-            html = self.__driver.page_source
-        else:
-            try:
-                req = requests.get(url, headers=self.__headers)
-                if req.status_code != 200:
-                    return None
-                else:
-                    html = req.text
-            except requests.exceptions.RequestException:
+        # if dynamically_generated:
+        #     self.__driver.get(url)
+        #     time.sleep(10)
+        #     html = self.__driver.page_source
+        # else:
+        try:
+            req = requests.get(url, headers=self.__headers)
+            if req.status_code != 200:
                 return None
-        return BeautifulSoup(html, 'html.parser')
+            else:
+                html = req.text
+        except requests.exceptions.RequestException:
+            return None
+    return BeautifulSoup(html, 'html.parser')
 
     def __safe_get(self, page_obj, selector):
         child_obj = page_obj.select(selector)
