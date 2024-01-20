@@ -23,21 +23,24 @@ sites = []
 for row in siteData:
     sites.append(Website(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
 
-for console in console_data:
-    print(console)
-    prices = []
-    for game in console_data[console]:
-        for site in sites:
-            if console in site.consoles:
-                price = crawler.search(game['Game'], site)
-                if price is not None: 
-                    prices.append(price)
-                    print(price)
-                else: prices.append(game['Price'])
+# for console in console_data:
+#     print(console)
+#     prices = []
+#     for game in console_data[console]:
+#         for site in sites:
+#             if console in site.consoles:
+#                 price = crawler.search(game['Game'], site)
+#                 if price is not None: 
+#                     prices.append(price)
+#                     print(price)
+#                 else: prices.append(game['Price'])
     
 
-# for site in sites:
-#     for console in console_data:
-#         print('GETTING INFO ABOUT: ' + console)
-#         for game in console_data[console]:
-#             crawler.search(game['Game'], site)
+for site in sites:
+    prices = []
+    for console in console_data:
+        for game in console_data[console]:
+            price = crawler.search(game['Game'], site)
+            if price is not None:
+                prices.append(price)
+            else: prices.append(game['Price'])
