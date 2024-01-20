@@ -26,7 +26,7 @@ for row in siteData:
 for filename in dataframes:
     prices = []
     df =dataframes[filename]
-    for index, game in df.itterows():
+    for index, game in df.iterrows():
         for site in sites:
             if console in site.consoles:
                 price = crawler.search(game['Game'], site)
