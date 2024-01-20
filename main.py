@@ -9,11 +9,11 @@ siteData = [['Amazon', 'https://www.amazon.co.uk/', 'https://www.amazon.co.uk/s?
             ['Argos', 'https://www.argos.co.uk/', 'https://www.argos.co.uk/search/', 'div[data-test="product-list"] div[data-test="component-product-card"]',
              'div[data-test="component-product-card-title"]', 'div[data-test="component-product-card-title"]', lambda tag: True if tag and 'Game' in tag.text else False,
              'div[data-test="component-product-card-price"] strong', False, ['Nintendo Switch', 'PC', 'PlayStation 5']],
-             ['CEX', 'https://uk.webuy.com/', 'https://uk.webuy.com/search?stext=', 'div.search-result-grid>div', 'div.card-title>a', 'div.card-subtitle', 
-              lambda tag: True if tag and 'Games' in tag.text else False, 'p.product-main-price',True, ['Nintendo Switch', 'PC', 'PlayStation 5']],
               ['STEAM', 'https://store.steampowered.com/', 'https://store.steampowered.com/search/?term=', '#search_resultsRows>a', '.title', '', 
                 None, 'div.discount_final_price', False, ['PC', 'PlayStation 5']]]
 
+# ['CEX', 'https://uk.webuy.com/', 'https://uk.webuy.com/search?stext=', 'div.search-result-grid>div', 'div.card-title>a', 'div.card-subtitle', 
+# lambda tag: True if tag and 'Games' in tag.text else False, 'p.product-main-price',True, ['Nintendo Switch', 'PC', 'PlayStation 5']],
 # ['Currys', 'https://www.currys.co.uk/', 'https://www.currys.co.uk/search?q=', 'div.product-item-element', 'h2.pdp-grid-product-name', 'div.ratings', 
 #                  lambda tag: True if tag else False, 'div.price-info span.value',False],
 # ['Very', 'https://www.very.co.uk/', 'https://www.very.co.uk/e/q/', 'div[id=product-listing-root] div[data-testid=gallery-product-card]', 'div.productInfo h3[data-testid="fuse-complex-product-card__title"]', '', 
