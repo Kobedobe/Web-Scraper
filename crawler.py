@@ -21,11 +21,13 @@ class Crawler:
         try:
             req = requests.get(url, headers=self.__headers)
             if req.status_code != 200:
+                print(req)
                 return None
             else:
                 html = req.text
         except requests.exceptions.RequestException:
             return None
+        print(req)
         return BeautifulSoup(html, 'html.parser')
 
     def __safe_get(self, page_obj, selector):
