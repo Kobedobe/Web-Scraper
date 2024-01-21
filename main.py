@@ -1,6 +1,13 @@
 from website import Website
 from crawler import Crawler
 from data import *
+from email.message import EmailMessage
+import ssl
+import smtplib
+import creds
+
+email_sender = 'hkobe38@gmail.com'
+email_receiver = '005986@gsal.org.uk'
 
 crawler = Crawler()
 siteData = [['STEAM', 'https://store.steampowered.com/', 'https://store.steampowered.com/search/?term=', '#search_resultsRows>a', '.title', '', 
@@ -34,10 +41,21 @@ for filename in dataframes:
                 prices.append(price)
                 print(price)
             else: prices.append(game['Price'])
-    df['Price'] = prices
-    df.to_csv(filename, index=False)
     
-
+    subject = filename
+    body = prices
+    
+    em = EmailMessage()
+    em['From'] = email_sender
+    em['To'] = email_receiver
+    em['Subject'] = subject
+    em.set_content(body)
+    
+    context = ssl.create_default_context()
+    
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(email_sender, creds.password)
+        smtp.sendmail(email_sender,email_receiver,em.as_string())
 # for site in sites:
 #     prices = []
 #     for console in console_data:
