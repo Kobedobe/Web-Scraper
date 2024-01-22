@@ -48,7 +48,7 @@ for filename in dataframes:
                 print(price)
             else: prices.append(game['Price'])
               
-    with open('prices.pkl', 'w') as f:
+    with open('prices.pkl', 'wb') as f:
       pickle.dump(prices, f)
     f.close()
     with open('prices.pkl', 'rb') as f:
