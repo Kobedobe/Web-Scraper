@@ -30,10 +30,34 @@ siteData = [['STEAM', 'https://store.steampowered.com/', 'https://store.steampow
 #                  None, 'div.productInfo div[data-testid="fuse-complex-product-card__price"]>h4', True],
 # ['Smyths Toys', 'https://www.smythstoys.com/uk/en-gb', 'https://www.smythstoys.com/uk/en-gb/search/?text=', 'div.item-panel div.details', 'h5 span.name', 
 #                  '', None, 'div.price span', True, ['Nintendo Switch', 'PC', 'PlayStation 5']],
+
+def send_email(csv_names,prices_list):
+    em = MIMEMultipart()
+    em['From'] = email_sender
+    em['To'] = email_receiver
+    em['Subject'] = 'Prices'
+    body = MIMEText('Pickled files:', 'plain')
+    msg.attach(body)    
+    for csv_name in csv_names:
+      filename = csv_name+'.pkl'
+      with open(filename, 'wb') as f:
+        pickle.dump(prices, f)
+      f.close()
+      with open(filename, 'rb') as f:
+        file_data = f.read()
+        attachment = MIMEApplication(file_data, Name = os.path.basename(filename))
+        attachment['Content-Disposition'] = 'attachment; filename="{}"'.format(os.path.basename(filename))    
+        em.attach(attachment)
+
+    context = ssl.create_default_context()
+    
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(email_sender, creds.password)
+        smtp.sendmail(email_sender,email_receiver,em.as_string())
 sites = []
 for row in siteData:
     sites.append(Website(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
-
+prices_list = []
 for filename in dataframes:
     prices = []
     df =dataframes[filename]
@@ -47,28 +71,11 @@ for filename in dataframes:
                 prices.append(price)
                 print(price)
             else: prices.append(game['Price'])
-              
-    with open('prices.pkl', 'wb') as f:
-      pickle.dump(prices, f)
-    f.close()
-    with open('prices.pkl', 'rb') as f:
-      file_data = f.read()
-      attachment = MIMEApplication(file_data, Name = os.path.basename('prices.pkl'))
-      attachment['Content-Disposition'] = 'attachment; filename="{}"'.format(os.path.basename('prices.pkl'))
+    prices_list.append(prices)
+  
+send_email(list(dataframes.keys()),prices_list)
 
-    subject = filename
     
-    em = MIMEMultipart()
-    em['From'] = email_sender
-    em['To'] = email_receiver
-    em['Subject'] = subject
-    em.attach(attachment)
-
-    context = ssl.create_default_context()
-    
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
-        smtp.login(email_sender, creds.password)
-        smtp.sendmail(email_sender,email_receiver,em.as_string())
 # for site in sites:
 #     prices = []
 #     for console in console_data:
