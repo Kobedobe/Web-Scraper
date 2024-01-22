@@ -61,6 +61,7 @@ def process_price(price):
     print(price)
     modified_price = price.replace('£', '')
     modified_price = float(modified_price)
+    print(modified_price)
     return modified_price
 
 sites = []
@@ -72,7 +73,6 @@ for filename in dataframes:
     df =dataframes[filename]
     print(filename)
     for index, game in df.iterrows():
-        print(2)
         for site in sites:
             # if console in site.consoles:
             price = crawler.search(game['Game'], site)
