@@ -39,6 +39,9 @@ def send_email(csv_names,prices_list):
     body = MIMEText('Pickled files:', 'plain')
     em.attach(body)    
     for i, csv_name in enumerate(csv_names):
+      print(i)
+      print(csv_name)
+      print(prices_list)
       filename = csv_name.replace('.csv', '')+'.pkl'
       with open(filename, 'wb') as f:
         pickle.dump(prices_list[i], f)
