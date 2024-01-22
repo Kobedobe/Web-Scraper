@@ -37,7 +37,7 @@ def send_email(csv_names,prices_list):
     em['To'] = email_receiver
     em['Subject'] = 'Prices'
     body = MIMEText('Pickled files:', 'plain')
-    msg.attach(body)    
+    em.attach(body)    
     for i, csv_name in enumerate(csv_names):
       filename = csv_name.replace('.csv', '')+'.pkl'
       with open(filename, 'wb') as f:
