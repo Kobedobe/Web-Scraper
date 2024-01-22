@@ -38,10 +38,10 @@ def send_email(csv_names,prices_list):
     em['Subject'] = 'Prices'
     body = MIMEText('Pickled files:', 'plain')
     msg.attach(body)    
-    for csv_name in csv_names:
-      filename = csv_name+'.pkl'
+    for i, csv_name in enumerate(csv_names):
+      filename = csv_name.replace('.csv', '')+'.pkl'
       with open(filename, 'wb') as f:
-        pickle.dump(prices, f)
+        pickle.dump(prices_list[i], f)
       f.close()
       with open(filename, 'rb') as f:
         file_data = f.read()
@@ -72,6 +72,7 @@ for filename in dataframes:
                 print(price)
             else: prices.append(game['Price'])
     prices_list.append(prices)
+    send_email(filename, [prices])
   
 send_email(list(dataframes.keys()),prices_list)
 
