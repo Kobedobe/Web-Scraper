@@ -80,7 +80,6 @@ for filename in dataframes:
                 prices.append(process_price(price))
             else: prices.append(game['Price'])
     prices_list.append(prices)
-    send_email([filename],[prices])
   
 send_email(list(dataframes.keys()),prices_list)
 
