@@ -54,6 +54,14 @@ def send_email(csv_names,prices_list):
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
         smtp.login(email_sender, creds.password)
         smtp.sendmail(email_sender,email_receiver,em.as_string())
+
+def process_price(price):
+    if price =='Free':
+      return 0
+    modified_price = price.replace('£', '')
+    modified_price = float(modified_price)
+    return modified_price
+
 sites = []
 for row in siteData:
     sites.append(Website(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
@@ -68,8 +76,7 @@ for filename in dataframes:
             # if console in site.consoles:
             price = crawler.search(game['Game'], site)
             if price is not None: 
-                prices.append(price)
-                print(price)
+                prices.append(process_price(price))
             else: prices.append(game['Price'])
     prices_list.append(prices)
   
