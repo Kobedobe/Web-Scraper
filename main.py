@@ -56,15 +56,14 @@ for filename in dataframes:
       attachment = MIMEApplication(file_data, Name = os.path.basename('prices.pkl'))
       attachment['Content-Disposition'] = 'attachment; filename="{}"'.format(os.path.basename('prices.pkl'))
 
-    msg.attach(attachment)
-
     subject = filename
     
     em = MIMEMultipart()
     em['From'] = email_sender
     em['To'] = email_receiver
     em['Subject'] = subject
-    
+    em.attach(attachment)
+
     context = ssl.create_default_context()
     
     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
