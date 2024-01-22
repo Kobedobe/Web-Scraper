@@ -1,10 +1,14 @@
 from website import Website
 from crawler import Crawler
 from data import *
-from email.message import EmailMessage
 import ssl
 import smtplib
 import creds
+import pickle
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
+import os.path
 
 email_sender = 'hkobe38@gmail.com'
 email_receiver = '005986@gsal.org.uk'
@@ -33,7 +37,6 @@ for row in siteData:
 for filename in dataframes:
     prices = []
     df =dataframes[filename]
-    print(df)
     print(filename)
     for index, game in df.iterrows():
         print(2)
@@ -44,15 +47,23 @@ for filename in dataframes:
                 prices.append(price)
                 print(price)
             else: prices.append(game['Price'])
-    
+              
+    with open('prices.pkl', 'w') as f:
+      pickle.dump(prices, f)
+    f.close()
+    with open('prices.pkl', 'rb') as f:
+      file_data = f.read()
+      attachment = MIMEApplication(file_data, Name = os.path.basename('prices.pkl'))
+      attachment['Content-Disposition'] = 'attachment; filename="{}"'.format(os.path.basename('prices.pkl'))
+
+    msg.attach(attachment)
+
     subject = filename
-    body = prices
     
-    em = EmailMessage()
+    em = MIMEMultipart()
     em['From'] = email_sender
     em['To'] = email_receiver
     em['Subject'] = subject
-    em.set_content(body)
     
     context = ssl.create_default_context()
     
