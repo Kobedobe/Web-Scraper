@@ -82,6 +82,7 @@ class Crawler:
 
 
     def search(self, game_name, site):
+        print(2)
         url = site.search_url + game_name
         print(url)
 
