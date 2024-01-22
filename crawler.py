@@ -21,11 +21,14 @@ class Crawler:
         try:
             req = requests.get(url)
             if req.status_code != 200:
+                print(req)
                 return None
             else:
                 html = req.text
         except requests.exceptions.RequestException:
+            print('damn')
             return None
+        print(req)
         return BeautifulSoup(html, 'html.parser')
 
     def __safe_get(self, page_obj, selector):
@@ -44,6 +47,8 @@ class Crawler:
         modified_product_name = re.sub('[-()!.:,\']', '', product_name)
         product_name_words = modified_product_name.split(' ')
         product_name_words = list(map(lambda word: word.strip().lower(), product_name_words))
+        print(game_name_words)
+        print(product_name_words)
         return set(game_name_words).issubset(product_name_words)
         
     
@@ -54,6 +59,7 @@ class Crawler:
             product_name = self.__get_text(result,site.name_selector)
             valid_game = self.__valid_game(game_name, product_name, site, result)
             if valid_game:
+                print(product_name)
                 return result
             i+=1
         return None
@@ -77,6 +83,8 @@ class Crawler:
 
     def search(self, game_name, site):
         url = site.search_url + game_name
+        print(url)
+
         bs = self.__get_page(url, site.dynamically_generated)
         if bs is not None:
             search_results = bs.select(site.results_selector)
@@ -88,6 +96,6 @@ class Crawler:
             self.__perform_random_delay()
             return price
         else:
+            print('page error')
             self.__perform_random_delay()
             return None
-
