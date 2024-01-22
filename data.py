@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 dataframes = {}
-directory = 'CSV Files'
+directory = '/home/Web-Scraper/CSV Files'
 print(2)
 for filename in os.listdir(directory):
     print(filename)
