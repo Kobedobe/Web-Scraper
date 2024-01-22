@@ -58,10 +58,11 @@ def send_email(csv_names,prices_list):
 def process_price(price):
     if price =='Free':
       return 0
-    print(price)
-    modified_price = price.replace('£', '')
-    modified_price = float(modified_price)
-    print(modified_price)
+    try:
+      modified_price = price.replace('£', '')
+      modified_price = float(modified_price)
+    except:
+      return 'N/A'
     return modified_price
 
 sites = []
