@@ -33,6 +33,8 @@ for row in siteData:
 for filename in dataframes:
     prices = []
     df =dataframes[filename]
+    print(df)
+    print(filename)
     for index, game in df.iterrows():
         print(2)
         for site in sites:
